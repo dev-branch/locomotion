@@ -3,13 +3,13 @@ class CreateCars < ActiveRecord::Migration[5.1]
     create_table :cars do |t|
       t.string :make, null: false
       t.string :model, null: false
-      t.string :year, null: false
+      t.integer :year, null: false
       t.string :vin, null: false
-      t.string :color
-      t.string :category
-      t.integer :cylinders
-      t.integer :mpg
-      t.integer :hp
+      t.string :color, default: 'black'
+      t.string :category, default: 'car'
+      t.integer :cylinders, default: 4
+      t.integer :mpg, default: 0
+      t.integer :hp, default: 0
       t.timestamps
     end
 

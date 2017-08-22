@@ -18,13 +18,13 @@ ActiveRecord::Schema.define(version: 20170822212556) do
   create_table "cars", force: :cascade do |t|
     t.string "make", null: false
     t.string "model", null: false
-    t.string "year", null: false
+    t.integer "year", null: false
     t.string "vin", null: false
-    t.string "color"
-    t.string "category"
-    t.integer "cylinders"
-    t.integer "mpg"
-    t.integer "hp"
+    t.string "color", default: "black"
+    t.string "category", default: "car"
+    t.integer "cylinders", default: 4
+    t.integer "mpg", default: 0
+    t.integer "hp", default: 0
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["make", "model", "year"], name: "index_cars_on_make_and_model_and_year", unique: true
