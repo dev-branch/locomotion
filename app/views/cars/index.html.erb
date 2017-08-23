@@ -1,0 +1,10 @@
+<h1>Cars</h1>
+
+<%= link_to 'New', new_car_path %>
+
+<% @cars.each do |c| %>
+  <div>
+    <%= link_to c.id, c%>
+    <span><%= c.make %><%= c.model %><%= c.year %></span>
+  </div>
+<% end %>
