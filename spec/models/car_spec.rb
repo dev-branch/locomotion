@@ -72,6 +72,11 @@ RSpec.describe Car, type: :model do
         @car.save
         expect(@car.errors[:vin].first).to eql("has already been taken")
       end
+      it 'fails vin check - not unique' do
+        @car.vin = '00000000000000002'
+        @car.save
+        expect(@car.errors.full_messages.first).to eql("Make has already been taken")
+      end
     end
   end
 end
