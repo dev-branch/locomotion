@@ -17,8 +17,7 @@
 #
 
 class Car < ApplicationRecord
-  before_validation :check_vin
-  before_save :upper_vin
+  before_validation :upper_vin, :check_vin_size, :check_vin_chars
 
   validates :make, :model, :year, :vin, presence: true
   validates :vin, uniqueness: true
@@ -26,11 +25,15 @@ class Car < ApplicationRecord
 
   private
 
-  def check_vin
-    errors.add(:vin, 'does not contain 17 alphanumeric characters') if vin.nil? || vin.size != 17
+  def upper_vin
+    self.vin = vin.upcase if vin
   end
 
-  def upper_vin
-    self.vin = vin.upcase
+  def check_vin_size
+    errors.add(:vin, 'does not contain 17 alphanumeric characters') if vin && vin.size != 17
+  end
+
+  def check_vin_chars
+    errors.add(:vin, 'invalid representation') if vin && vin !~ /^[0-9A-Z]{17}$/
   end
 end
