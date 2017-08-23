@@ -22,7 +22,7 @@ RSpec.describe Car, type: :model do
 
   before(:each) do
     h = {make: 'Nissan', model: 'Pathfinder', year: 2017}
-    Car.create(h.merge({vin: '00000000000000001'}))
+    Car.create(h.merge({vin: 'B0000000000000001'}))
     @car = Car.new(h)
   end
 
@@ -39,11 +39,11 @@ RSpec.describe Car, type: :model do
   describe '.create' do
     context 'all requied data present' do
       it "passes all validations" do
-        c = Car.create(make: 'Toyoata', model: 'Corolla', year: 2015, vin: '00000000000000002')
+        c = Car.create(make: 'Toyota', model: 'Corolla', year: 2015, vin: 'B0000000000000002')
         expect(c.id).to_not be_nil
         expect(c.created_at).to_not be_nil
         expect(c.updated_at).to_not be_nil
-        expect(c.vin).to eql('00000000000000002')
+        expect(c.vin).to eql('B0000000000000002')
         expect(c.cylinders).to eql(4)
         expect(c.color).to eql('black')
         expect(c.category).to eql('car')
@@ -68,12 +68,12 @@ RSpec.describe Car, type: :model do
         expect(@car.errors[:vin].first).to eql("invalid representation")
       end
       it 'fails vin check - not unique' do
-        @car.vin = '00000000000000001'
+        @car.vin = 'B0000000000000001'
         @car.save
         expect(@car.errors[:vin].first).to eql("has already been taken")
       end
       it 'fails vin check - not unique' do
-        @car.vin = '00000000000000002'
+        @car.vin = 'B0000000000000002'
         @car.save
         expect(@car.errors.full_messages.first).to eql("Make has already been taken")
       end
